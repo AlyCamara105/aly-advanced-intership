@@ -6,8 +6,47 @@ import { BsStarFill } from "react-icons/bs";
 import { BiCrown } from "react-icons/bi";
 import { RiLeafLine } from "react-icons/ri";
 import { BsStarHalf } from "react-icons/bs";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    const statisticsHeadings = document.querySelectorAll(
+      ".statistics__heading",
+    );
+    let firstPointerHeaderIndex = -1;
+    let secondPointerHeaderIndex = firstPointerHeaderIndex + 6;
+
+    setInterval(() => {
+      let firstPointerRemoveHeaderIndex = null;
+      let secondPointerRemoveHeaderIndex = null;
+
+      firstPointerHeaderIndex += 1;
+      firstPointerRemoveHeaderIndex =
+        firstPointerHeaderIndex - 1 == -1 ? 11 : firstPointerHeaderIndex - 1;
+      secondPointerHeaderIndex = firstPointerHeaderIndex + 6;
+      secondPointerRemoveHeaderIndex = secondPointerHeaderIndex - 1;
+
+      statisticsHeadings[firstPointerRemoveHeaderIndex].classList.remove(
+        "statistics__heading--active",
+      );
+
+      statisticsHeadings[secondPointerRemoveHeaderIndex].classList.remove(
+        "statistics__heading--active",
+      );
+
+      statisticsHeadings[firstPointerHeaderIndex].classList.add(
+        "statistics__heading--active",
+      );
+      statisticsHeadings[secondPointerHeaderIndex].classList.add(
+        "statistics__heading--active",
+      );
+
+      if (firstPointerHeaderIndex == 5) {
+        firstPointerHeaderIndex = -1;
+      }
+    }, 2250);
+  }, []);
+
   return (
     <div className="home__page">
       <Head>
