@@ -7,8 +7,17 @@ import { BiCrown } from "react-icons/bi";
 import { RiLeafLine } from "react-icons/ri";
 import { BsStarHalf } from "react-icons/bs";
 import { useEffect } from "react";
+import LoginModal from "@/components/LoginModal";
+import { useAppDispatch } from "@/redux/hooks";
+import { setModalOpen } from "@/redux/LoginModalSlice";
 
 export default function Home() {
+  const dispatch = useAppDispatch();
+
+  const openLoginModal = (): void => {
+    dispatch(setModalOpen(true));
+  };
+
   useEffect(() => {
     const statisticsHeadings = document.querySelectorAll(
       ".statistics__heading",
@@ -20,9 +29,9 @@ export default function Home() {
       let firstPointerRemoveHeaderIndex = null;
       let secondPointerRemoveHeaderIndex = null;
 
-      firstPointerHeaderIndex += 1;
       firstPointerRemoveHeaderIndex =
-        firstPointerHeaderIndex - 1 == -1 ? 11 : firstPointerHeaderIndex - 1;
+        firstPointerHeaderIndex == -1 ? 11 : firstPointerHeaderIndex;
+      firstPointerHeaderIndex += 1;
       secondPointerHeaderIndex = firstPointerHeaderIndex + 6;
       secondPointerRemoveHeaderIndex = secondPointerHeaderIndex - 1;
 
@@ -41,9 +50,8 @@ export default function Home() {
         "statistics__heading--active",
       );
 
-      if (firstPointerHeaderIndex == 5) {
-        firstPointerHeaderIndex = -1;
-      }
+      firstPointerHeaderIndex =
+        firstPointerHeaderIndex == 5 ? -1 : firstPointerHeaderIndex;
     }, 2250);
   }, []);
 
@@ -52,6 +60,7 @@ export default function Home() {
       <Head>
         <title>Summarist Home Page</title>
       </Head>
+      <LoginModal />
       <div className="home__body">
         <nav className="nav">
           <div className="nav__wrapper">
@@ -59,7 +68,12 @@ export default function Home() {
               <img className="nav__img" src="logo.png" alt="logo" />
             </figure>
             <ul className="nav__list--wrapper home__ul">
-              <li className="nav__list nav__list--login">Login</li>
+              <li
+                className="nav__list nav__list--login"
+                onClick={openLoginModal}
+              >
+                <button>Login</button>
+              </li>
               <li className="nav__list nav__list--mobile">About</li>
               <li className="nav__list nav__list--mobile">Contact</li>
               <li className="nav__list nav__list--mobile">Help</li>
@@ -82,7 +96,10 @@ export default function Home() {
                     <br className="remove--tablet" />
                     and even people who don’t like to read.
                   </div>
-                  <button className="btn home__cta--btn home__button">
+                  <button
+                    className="btn home__cta--btn home__button"
+                    onClick={openLoginModal}
+                  >
                     Login
                   </button>
                 </div>
@@ -322,7 +339,10 @@ export default function Home() {
                 </div>
               </div>
               <div className="reviews__btn--wrapper">
-                <button className="btn home__cta--btn home__button">
+                <button
+                  className="btn home__cta--btn home__button"
+                  onClick={openLoginModal}
+                >
                   Login
                 </button>
               </div>

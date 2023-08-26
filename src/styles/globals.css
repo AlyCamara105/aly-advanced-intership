@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
 
 /* Home Page css */
 
@@ -8,7 +13,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
 }
 
 .home__body {
@@ -552,8 +556,8 @@
   }
 }
 
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/* Login Modal */
 
-FIX THE 100% ERROR BECAUSE OF SOME PARENT NOT BEING SET TO 100%
-
-   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  */
+.MuiModal-backdrop {
+  @apply !bg-[rgba(0,0,0,0.75)];
+}
