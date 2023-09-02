@@ -42,7 +42,7 @@ export default function LoginModal() {
   const guestEmail = "guest@gmail.com";
   const guestPassword = "guest123";
 
-  function handleClose(): void {
+  function CloseModal(): void {
     dispatch(setModalOpen(false));
     LoginModal();
     setEmail("");
@@ -76,6 +76,7 @@ export default function LoginModal() {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         router.push("/for-you");
+        CloseModal();
       })
       .catch((error) => {
         setFirebaseError(error.message);
@@ -86,6 +87,7 @@ export default function LoginModal() {
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         router.push("/for-you");
+        CloseModal();
       })
       .catch((error) => {
         setFirebaseError(error.message);
@@ -96,6 +98,7 @@ export default function LoginModal() {
     await signInWithEmailAndPassword(auth, guestEmail, guestPassword)
       .then((userCredentials) => {
         router.push("/for-you");
+        CloseModal();
       })
       .catch((error) => {
         setFirebaseError(error.message);
@@ -106,6 +109,7 @@ export default function LoginModal() {
     await signInWithPopup(auth, provider)
       .then((result) => {
         router.push("/for-you");
+        CloseModal();
       })
       .catch((error) => {
         setFirebaseError(error.message);
@@ -139,7 +143,7 @@ export default function LoginModal() {
       <Modal
         className="flex h-full w-full items-center justify-center"
         open={modalOpen}
-        onClose={handleClose}
+        onClose={CloseModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         disableScrollLock={true}
@@ -149,7 +153,7 @@ export default function LoginModal() {
             isLogin ? "523" : isSignup ? "401" : "256"
           }px] w-full max-w-[400px] flex-col items-center rounded-md bg-white px-[32px] pb-[24px] pt-[48px]`}
         >
-          <div onClick={handleClose}>
+          <div onClick={CloseModal}>
             <IoClose className="absolute right-[1%] top-[2%] cursor-pointer text-4xl transition-all duration-200 hover:opacity-20" />
           </div>
           <h1 className="mb-6 text-xl font-bold">

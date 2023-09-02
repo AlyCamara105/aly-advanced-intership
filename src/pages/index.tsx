@@ -7,7 +7,6 @@ import { BiCrown } from "react-icons/bi";
 import { RiLeafLine } from "react-icons/ri";
 import { BsStarHalf } from "react-icons/bs";
 import { useEffect } from "react";
-import LoginModal from "@/components/LoginModal";
 import { useAppDispatch } from "@/redux/hooks";
 import { setModalOpen } from "@/redux/LoginModalSlice";
 import { auth } from "@/../firebase";
@@ -76,7 +75,6 @@ export default function Home() {
       <Head>
         <title>Summarist Home Page</title>
       </Head>
-      <LoginModal />
       <div className="home__body">
         <nav className="nav">
           <div className="nav__wrapper">
