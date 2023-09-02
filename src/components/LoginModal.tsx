@@ -39,6 +39,8 @@ export default function LoginModal() {
     React.useState(false);
   const router = useRouter();
   const provider = new GoogleAuthProvider();
+  const guestEmail = "guest@gmail.com";
+  const guestPassword = "guest123";
 
   function handleClose(): void {
     dispatch(setModalOpen(false));
@@ -91,7 +93,7 @@ export default function LoginModal() {
   }
 
   async function GuestLogin(): Promise<void> {
-    await signInWithEmailAndPassword(auth, "guest@gmail.com", "guest123")
+    await signInWithEmailAndPassword(auth, guestEmail, guestPassword)
       .then((userCredentials) => {
         router.push("/for-you");
       })

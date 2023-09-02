@@ -12,19 +12,27 @@ import { useAppDispatch } from "@/redux/hooks";
 import { setModalOpen } from "@/redux/LoginModalSlice";
 import { auth } from "@/../firebase";
 import { useRouter } from "next/router";
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 export default function Home() {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  function openLoginModal(): void {
+    dispatch(setModalOpen(true));
+  }
+
   async function SignOut(): Promise<void> {
     await signOut(auth);
   }
 
-  const openLoginModal = (): void => {
-    dispatch(setModalOpen(true));
-  };
+  // SignOut();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      router.push("/for-you");
+    }
+  });
 
   useEffect(() => {
     const statisticsHeadings = document.querySelectorAll(
